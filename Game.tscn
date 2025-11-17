@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://hg2d7bdjhs8d"]
+
+[ext_resource type="PackedScene" uid="uid://6ee5yhmn8h6a" path="res://Player.tscn" id="1_wbfu4"]
+[ext_resource type="Script" uid="uid://dvdw8mvsf3h8n" path="res://ground_manager.gd" id="2_xkndl"]
+[ext_resource type="PackedScene" uid="uid://mgccj0uqie4v" path="res://Segment.tscn" id="3_u44n3"]
+
+[sub_resource type="Environment" id="Environment_wbfu4"]
+background_mode = 1
+background_color = Color(0.9771398, 0.9592188, 0.895621, 1)
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 16.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_wbfu4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0836213, 0)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 3, 5)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wbfu4")
+
+[node name="GroundManager" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("2_xkndl")
+player = NodePath("../Player")
+segment_scene = ExtResource("3_u44n3")
